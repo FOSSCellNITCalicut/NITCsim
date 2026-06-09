@@ -1,4 +1,4 @@
-[gd_scene load_steps=40 format=3 uid="uid://bhe6171ekahue"]
+[gd_scene format=3 uid="uid://bhe6171ekahue"]
 
 [ext_resource type="Texture2D" uid="uid://bo1frr4wofs2n" path="res://sprite/characters/player.png" id="1_oul6g"]
 
@@ -290,36 +290,37 @@ animations = [{
 "speed": 5.0
 }]
 
-[node name="player" type="CharacterBody2D"]
+[node name="player" type="CharacterBody2D" unique_id=2069761242]
 y_sort_enabled = true
 position = Vector2(113, 74)
 collision_layer = 3
 collision_mask = 3
 up_direction = Vector2(1, 0)
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1663726821]
 position = Vector2(138, 64)
 shape = SubResource("CircleShape2D_wt17y")
 
-[node name="Sprite2D" type="Sprite2D" parent="."]
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=270446914]
 texture_filter = 1
 position = Vector2(133, 65)
 scale = Vector2(1.05, 0.953125)
 hframes = 21
 
-[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=1578444790]
 position = Vector2(137, 48)
 scale = Vector2(2.29167, 1.95833)
 sprite_frames = SubResource("SpriteFrames_rgyib")
 animation = &"front_idle"
 
-[node name="Camera2D" type="Camera2D" parent="."]
+[node name="Camera2D" type="Camera2D" parent="." unique_id=1495825670]
 position = Vector2(146, 69)
 
-[node name="Label" type="Label" parent="."]
+[node name="Label" type="Label" parent="." unique_id=916376500]
 z_index = 8
 offset_left = 79.0
 offset_top = 10.0
 offset_right = 200.0
 offset_bottom = 33.0
 text = "Press E to enter"
+metadata/_edit_use_anchors_ = true
