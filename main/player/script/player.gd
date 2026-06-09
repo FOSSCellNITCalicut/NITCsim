@@ -13,16 +13,34 @@ var is_paused := false
 
 
 func _ready():
+	if GameState.save_data:
+		position = Vector2(GameState.save_data.position.x, GameState.save_data.position.y)
+		current_dir = GameState.save_data.direction
+		can_interact = GameState.save_data.can_interact
+		is_game_active = true # Activate game immediately on load
+		GameState.save_data = null # Clear data after loading
+		if start_ui:
+			start_ui.visible = false
+		if pause_ui:
+			pause_ui.visible = false
+		_play_start_idle()
+		return
 	if start_ui and start_ui.has_node("StartButton"):
 		var btn = start_ui.get_node("StartButton")
-		btn.pressed.connect(_on_start_button_pressed)
+		btn.pressed.connect(_on_new_game_button_pressed)
 		start_ui.visible = true # Show UI at start
+		var cont_btn = pause_ui.get_node_or_null("ContinueButton")
+		if cont_btn:
+			cont_btn.pressed.connect(_on_continue_button_pressed)
 	if pause_ui:
 		pause_ui.visible = false
 		var quit_btn = pause_ui.get_node("../PauseUI/Quitbutton")
 		if quit_btn:
 			quit_btn.pressed.connect(_on_quitbutton_pressed)
-		var cont_btn = pause_ui.get_node_or_null("ContinueButton")
+		var save_btn = pause_ui.get_node_or_null("../PauseUI/Savebutton")
+		if save_btn:
+			save_btn.pressed.connect(_on_save_button_pressed)
+		var cont_btn = pause_ui.get_node_or_null("../PauseUI/ContinueButton")
 		if cont_btn:
 			cont_btn.pressed.connect(_on_continuebutton_pressed)
 	
@@ -121,14 +139,30 @@ func _on_quitbutton_pressed():
 	print("Exiting...")
 
 
-func _on_start_button_pressed():
-	is_game_active = true 
-	start_ui.visible = false # Hide the entire CanvasLayer
-	print("Game Started - Controls Enabled")
-
-
 func _on_continuebutton_pressed():
 	is_paused = false
 	get_tree().paused = false
 	if pause_ui:
 		pause_ui.visible = false
+
+func _on_save_button_pressed():
+	var data = {
+		"scene": get_tree().current_scene.scene_file_path,
+		"position": {"x": position.x, "y": position.y},
+		"direction": current_dir,
+		"can_interact": can_interact,
+		"interact_label.visible":interact_label.visible
+	}
+	GameState.save_game(data)
+	print("Saving...")
+	get_tree().quit()
+
+
+func _on_new_game_button_pressed():
+	is_game_active = true 
+	start_ui.visible = false # Hide the entire CanvasLayer
+	print("New Game Started - Controls Enabled")
+
+
+func _on_continue_button_pressed():
+	GameState.load_game()

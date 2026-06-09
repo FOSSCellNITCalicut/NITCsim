@@ -19,7 +19,10 @@ func _ready():
 		var quit_btn = pause_ui.get_node("../PauseUI/Quitbutton")
 		if quit_btn:
 			quit_btn.pressed.connect(_on_quitbutton_pressed)
-		var cont_btn = pause_ui.get_node_or_null("ss../PauseUI/Continuebutton")
+		var save_btn = pause_ui.get_node_or_null("../PauseUI/Savebutton")
+		if save_btn:
+			save_btn.pressed.connect(_on_save_button_pressed)
+		var cont_btn = pause_ui.get_node_or_null("../PauseUI/Continuebutton")
 		if cont_btn:
 			cont_btn.pressed.connect(_on_continuebutton_pressed)
 	
@@ -110,3 +113,14 @@ func _on_continuebutton_pressed():
 	get_tree().paused = false
 	if pause_ui:
 		pause_ui.visible = false
+
+func _on_save_button_pressed():
+	var data = {
+		"scene": get_tree().current_scene.scene_file_path,
+		"position": {"x": position.x, "y": position.y},
+		"direction": current_dir,
+		"can_interact": can_interact
+	}
+	GameState.save_game(data)
+	print("Saving...")
+	get_tree().quit()
