@@ -1,0 +1,21 @@
+[gd_scene format=3 uid="uid://cuv8v5pamu1is"]
+
+[ext_resource type="Script" path="res://furniture_piece.gd" id="1_furniture"]
+[ext_resource type="Texture2D" uid="uid://c5n5qvms48yww" path="res://sprite/Tilemap/tilemap_packed.png" id="2_tilemap"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_furniture"]
+size = Vector2(44, 18)
+
+[node name="FurniturePiece" type="StaticBody2D"]
+collision_layer = 1
+collision_mask = 0
+script = ExtResource("1_furniture")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("2_tilemap")
+region_enabled = true
+region_rect = Rect2(496, 192, 48, 32)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, 10)
+shape = SubResource("RectangleShape2D_furniture")

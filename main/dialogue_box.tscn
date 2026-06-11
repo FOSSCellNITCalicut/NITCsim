@@ -1,0 +1,42 @@
+[gd_scene load_steps=2 format=3 uid="uid://bqx7dialoguebox1"]
+
+[ext_resource type="Script" path="res://dialogue_box.gd" id="1_dialogue"]
+
+[node name="DialogueBox" type="CanvasLayer"]
+layer = 20
+script = ExtResource("1_dialogue")
+
+[node name="Panel" type="PanelContainer" parent="."]
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 40.0
+offset_top = -130.0
+offset_right = -40.0
+offset_bottom = -20.0
+grow_horizontal = 2
+grow_vertical = 0
+
+[node name="Margin" type="MarginContainer" parent="Panel"]
+theme_override_constants/margin_left = 12
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 12
+theme_override_constants/margin_bottom = 10
+
+[node name="VBox" type="VBoxContainer" parent="Panel/Margin"]
+theme_override_constants/separation = 6
+
+[node name="Speaker" type="Label" parent="Panel/Margin/VBox"]
+theme_override_font_sizes/font_size = 14
+text = "NPC"
+
+[node name="Text" type="Label" parent="Panel/Margin/VBox"]
+autowrap_mode = 3
+text = "Dialogue goes here."
+
+[node name="Hint" type="Label" parent="Panel/Margin/VBox"]
+theme_override_colors/font_color = Color(0.7, 0.7, 0.7, 1)
+theme_override_font_sizes/font_size = 11
+text = "Press E to continue"
+horizontal_alignment = 2

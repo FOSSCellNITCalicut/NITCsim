@@ -1,0 +1,34 @@
+[gd_scene format=3 uid="uid://b8cgfj6blkrc7"]
+
+[ext_resource type="PackedScene" path="res://furniture_piece.tscn" id="1_furniture"]
+
+[node name="TableSet" type="Node2D"]
+
+[node name="Table" parent="." instance=ExtResource("1_furniture")]
+sprite_region = Rect2(464, 176, 48, 24)
+collision_size = Vector2(44, 14)
+collision_offset = Vector2(0, 8)
+
+[node name="ChairTop" parent="." instance=ExtResource("1_furniture")]
+position = Vector2(0, -22)
+sprite_region = Rect2(528, 160, 16, 16)
+collision_size = Vector2(12, 10)
+collision_offset = Vector2(0, 4)
+
+[node name="ChairBottom" parent="." instance=ExtResource("1_furniture")]
+position = Vector2(0, 22)
+sprite_region = Rect2(528, 160, 16, 16)
+collision_size = Vector2(12, 10)
+collision_offset = Vector2(0, 4)
+
+[node name="ChairLeft" parent="." instance=ExtResource("1_furniture")]
+position = Vector2(-28, 0)
+sprite_region = Rect2(528, 160, 16, 16)
+collision_size = Vector2(12, 10)
+collision_offset = Vector2(0, 4)
+
+[node name="ChairRight" parent="." instance=ExtResource("1_furniture")]
+position = Vector2(28, 0)
+sprite_region = Rect2(528, 160, 16, 16)
+collision_size = Vector2(12, 10)
+collision_offset = Vector2(0, 4)
