@@ -2895,16 +2895,26 @@ polygon = PackedVector2Array(21.4187, -8.4189, 498.419, -3.4189, 496.419, 257.58
 
 [node name="Quitbutton" type="Button" parent="PauseUI" unique_id=2012177985]
 process_mode = 3
-offset_left = 372.0
-offset_top = 179.0
-offset_right = 451.0
-offset_bottom = 210.0
+offset_left = 375.0
+offset_top = 227.0
+offset_right = 465.0
+offset_bottom = 258.0
 text = "Quit"
 
 [node name="Continuebutton" type="Button" parent="PauseUI" unique_id=859285941]
 process_mode = 3
-offset_left = 372.0
-offset_top = 143.0
-offset_right = 451.0
-offset_bottom = 174.0
+offset_left = 374.0
+offset_top = 191.0
+offset_right = 467.0
+offset_bottom = 222.0
 text = "Continue"
+
+[node name="Savebutton" type="Button" parent="PauseUI" unique_id=1899555473]
+process_mode = 3
+offset_left = 373.0
+offset_top = 156.0
+offset_right = 467.0
+offset_bottom = 187.0
+text = "Save Game"
+
+[connection signal="pressed" from="PauseUI/Savebutton" to="player" method="_on_save_button_pressed"]

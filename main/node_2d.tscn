@@ -3194,45 +3194,57 @@ position = Vector2(-157, 94)
 
 [node name="StartUI" type="CanvasLayer" parent="." unique_id=1139255326]
 
-[node name="Menu button" type="Button" parent="StartUI" unique_id=431710151]
-offset_left = 396.00003
+[node name="Continue_button" type="Button" parent="StartUI" unique_id=431710151]
+offset_left = 379.0
 offset_top = 57.999992
-offset_right = 475.0
+offset_right = 474.00003
 offset_bottom = 89.0
-text = "Menu"
+text = "Continue"
 
-[node name="Start button" type="Button" parent="StartUI" unique_id=2036063627]
-offset_left = 396.00003
+[node name="New_game_button" type="Button" parent="StartUI" unique_id=2036063627]
+offset_left = 380.0
 offset_top = 98.0
-offset_right = 475.0
+offset_right = 474.00003
 offset_bottom = 129.0
-text = "Start"
+text = "New Game"
 
-[node name="quit button" type="Button" parent="StartUI" unique_id=1843587897]
-offset_left = 396.0
+[node name="Quitbutton" type="Button" parent="StartUI" unique_id=1843587897]
+offset_left = 379.0
 offset_top = 139.0
-offset_right = 475.0
+offset_right = 474.0
 offset_bottom = 170.0
 text = "Quit"
 
 [node name="PauseUI" type="CanvasLayer" parent="." unique_id=1113987660]
+process_mode = 2
 
 [node name="Quitbutton" type="Button" parent="PauseUI" unique_id=181025031]
 process_mode = 3
-offset_left = 397.0
+offset_left = 383.0
 offset_top = 237.0
-offset_right = 476.0
+offset_right = 474.0
 offset_bottom = 268.0
 text = "Quit"
 
 [node name="Continuebutton" type="Button" parent="PauseUI" unique_id=872476605]
 process_mode = 3
-offset_left = 397.0
+offset_left = 382.0
 offset_top = 199.0
-offset_right = 476.0
+offset_right = 474.0
 offset_bottom = 230.0
 text = "Continue"
 
-[connection signal="pressed" from="StartUI/Start button" to="player" method="_on_start_button_pressed"]
-[connection signal="pressed" from="StartUI/quit button" to="player" method="_on_quitbutton_pressed"]
+[node name="Savebutton" type="Button" parent="PauseUI" unique_id=1250092399]
+process_mode = 3
+offset_left = 381.0
+offset_top = 159.0
+offset_right = 475.0
+offset_bottom = 190.0
+text = "Save Game"
+
+[connection signal="pressed" from="StartUI/Continue_button" to="player" method="_on_continue_button_pressed"]
+[connection signal="pressed" from="StartUI/New_game_button" to="player" method="_on_new_game_button_pressed"]
+[connection signal="pressed" from="StartUI/Quitbutton" to="player" method="_on_quitbutton_pressed"]
+[connection signal="pressed" from="PauseUI/Quitbutton" to="player" method="_on_quitbutton_pressed"]
 [connection signal="pressed" from="PauseUI/Continuebutton" to="player" method="_on_continuebutton_pressed"]
+[connection signal="pressed" from="PauseUI/Savebutton" to="player" method="_on_save_button_pressed"]
