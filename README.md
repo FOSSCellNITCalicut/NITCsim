@@ -21,7 +21,7 @@ For the NITC community
 
 
 *To Do*
-- [ ] Start menu
+- [x] Start menu and pause menu
 - [ ] Building interaction
 - [ ] Player movement fixes
 - [ ] Collision fixes
