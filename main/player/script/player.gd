@@ -154,7 +154,7 @@ func _on_save_button_pressed():
 		"interact_label.visible":interact_label.visible
 	}
 	GameState.save_game(data)
-	print("Saving...")
+	print("Game saved")
 	get_tree().quit()
 
 
