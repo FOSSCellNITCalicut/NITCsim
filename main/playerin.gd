@@ -23,6 +23,10 @@ func _ready():
 		if save_btn:
 			save_btn.pressed.connect(_on_save_button_pressed)
 		var cont_btn = pause_ui.get_node_or_null("../PauseUI/Continuebutton")
+		var save_btn = pause_ui.get_node_or_null("../PauseUI/Savebutton")
+		if save_btn:
+			save_btn.pressed.connect(_on_save_button_pressed)
+		var cont_btn = pause_ui.get_node_or_null("../PauseUI/Continuebutton")
 		if cont_btn:
 			cont_btn.pressed.connect(_on_continuebutton_pressed)
 	
@@ -61,7 +65,7 @@ func _physics_process(_delta):
 	move_and_slide()
 
 func _process(_delta):
-	if Input.is_action_just_pressed("ui_cancel"): # Usually ESC
+	if Input.is_action_just_pressed("ui_cancel"): # ESC button 
 		toggle_pause()
 		return
 	if can_interact and Input.is_action_just_pressed("interact"):
@@ -98,7 +102,7 @@ func hide_interact_label():
 
 func toggle_pause():
 	is_paused = not is_paused
-	get_tree().paused = is_paused # Freezes physics/process for the whole tree
+	get_tree().paused = is_paused
 	if pause_ui:
 		pause_ui.visible = is_paused
 
@@ -118,8 +122,7 @@ func _on_save_button_pressed():
 	var data = {
 		"scene": get_tree().current_scene.scene_file_path,
 		"position": {"x": position.x, "y": position.y},
-		"direction": current_dir,
-		"can_interact": can_interact
+		"direction": current_dir
 	}
 	GameState.save_game(data)
 	print("Saving...")
