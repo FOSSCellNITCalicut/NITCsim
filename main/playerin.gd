@@ -119,7 +119,7 @@ func _on_save_button_pressed():
 		"scene": get_tree().current_scene.scene_file_path,
 		"position": {"x": position.x, "y": position.y},
 		"direction": current_dir,
-		"can_interact": can_interact
+		#"can_interact": can_interact
 	}
 	GameState.save_game(data)
 	print("Saving...")

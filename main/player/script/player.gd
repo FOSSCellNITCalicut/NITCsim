@@ -13,10 +13,12 @@ var is_paused := false
 
 
 func _ready():
+	interact_label.visible = false
+	is_game_active = false   
 	if GameState.save_data:
 		position = Vector2(GameState.save_data.position.x, GameState.save_data.position.y)
 		current_dir = GameState.save_data.direction
-		can_interact = GameState.save_data.can_interact
+		#can_interact = GameState.save_data.can_interact
 		is_game_active = true # Activate game immediately on load
 		GameState.save_data = null # Clear data after loading
 		if start_ui:
@@ -29,7 +31,7 @@ func _ready():
 		var btn = start_ui.get_node("StartButton")
 		btn.pressed.connect(_on_new_game_button_pressed)
 		start_ui.visible = true # Show UI at start
-		var cont_btn = pause_ui.get_node_or_null("ContinueButton")
+		var cont_btn = start_ui.get_node_or_null("ContinueButton")
 		if cont_btn:
 			cont_btn.pressed.connect(_on_continue_button_pressed)
 	if pause_ui:
@@ -46,8 +48,7 @@ func _ready():
 	
 	# Start in idle, NO movement allowed yet
 	call_deferred("_play_start_idle")
-	interact_label.visible = false
-	is_game_active = false 
+
 
 func _play_start_idle():
 	anim.play("front_idle")
@@ -90,7 +91,7 @@ func _physics_process(_delta):
 func _process(_delta):
 	if not is_game_active:
 		return
-	if Input.is_action_just_pressed("ui_cancel"): # Usually ESC
+	if Input.is_action_just_pressed("ui_cancel"): # ESC
 		toggle_pause()
 		return
 	if is_paused:
@@ -150,8 +151,9 @@ func _on_save_button_pressed():
 		"scene": get_tree().current_scene.scene_file_path,
 		"position": {"x": position.x, "y": position.y},
 		"direction": current_dir,
-		"can_interact": can_interact,
-		"interact_label.visible":interact_label.visible
+		#"can_interact": can_interact,
+		#"interact_label.visible":interact_label.visible,
+		#"current_interactable":current_interactable
 	}
 	GameState.save_game(data)
 	print("Game saved")
