@@ -7,6 +7,7 @@ extends CharacterBody2D
 const SPEED = 100
 var current_dir = "down"
 var can_interact := false
+var current_interactable = null
 var is_game_active := false 
 var is_paused := false
 
@@ -95,10 +96,13 @@ func _process(_delta):
 		return
 	if is_paused:
 		return # Stop interaction while paused
-	if can_interact and Input.is_action_just_pressed("interact"):
-		interact_label.visible = false
-		can_interact = false
-		get_tree().change_scene_to_file("res://inside.tscn")
+	if Input.is_action_just_pressed("interact"):
+		if current_interactable != null:
+			current_interactable.interact()
+		elif can_interact:
+			interact_label.visible = false
+			can_interact = false
+			get_tree().change_scene_to_file("res://inside.tscn")
 
 
 
