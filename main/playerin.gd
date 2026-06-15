@@ -23,6 +23,10 @@ func _ready():
 		if save_btn:
 			save_btn.pressed.connect(_on_save_button_pressed)
 		var cont_btn = pause_ui.get_node_or_null("../PauseUI/Continuebutton")
+		var save_btn = pause_ui.get_node_or_null("../PauseUI/Savebutton")
+		if save_btn:
+			save_btn.pressed.connect(_on_save_button_pressed)
+		var cont_btn = pause_ui.get_node_or_null("../PauseUI/Continuebutton")
 		if cont_btn:
 			cont_btn.pressed.connect(_on_continuebutton_pressed)
 	
