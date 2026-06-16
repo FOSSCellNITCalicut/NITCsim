@@ -23,9 +23,9 @@ For the NITC community
 *To Do*
 - [x] Start menu and pause menu
 - [ ] Building interaction
-- [ ] Player movement fixes
+- [x] Player movement fixes
 - [ ] Collision fixes
-- [ ] Animations (diagonal motion)
+- [x] Animations (diagonal motion)
 
 
 *PR & Branch Format*
