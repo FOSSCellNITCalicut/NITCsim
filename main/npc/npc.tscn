@@ -5,14 +5,12 @@
 [sub_resource type="CircleShape2D" id="CircleShape2D_e4gvk"]
 radius = 30.0
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_rfo3n"]
-size = Vector2(32, 48)
-
 [node name="NPC" type="Node2D" unique_id=204296356]
+z_as_relative = false
 y_sort_enabled = true
 script = ExtResource("1_3n7fq")
 
-[node name="ColorRect" type="ColorRect" parent="."]
+[node name="ColorRect" type="ColorRect" parent="." unique_id=768312300]
 z_index = 1
 offset_left = -16.0
 offset_top = -24.0
