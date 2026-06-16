@@ -77,7 +77,7 @@ func _physics_process(_delta):
 		elif abs(input_dir.y) < 0.1 and input_dir.x != 0:
 			current_dir = "right" if input_dir.x > 0 else "left"
 		else:
-			current_dir = "right" if abs(input_dir.x) > abs(input_dir.y) else ("down" if input_dir.y > 0 else "up")
+			current_dir = "right" if input_dir.x > 0 else "left"
 		
 		velocity = input_dir.normalized() * SPEED
 		play_anim(true)
@@ -104,6 +104,9 @@ func _process(_delta):
 
 func play_anim(moving: bool):
 	match current_dir:
+		"up":
+			anim.flip_h = false
+			anim.play("back_walk" if moving else "back_idle")
 		"right":
 			anim.flip_h = false
 			anim.play("side_walk" if moving else "side_idle")
@@ -113,9 +116,7 @@ func play_anim(moving: bool):
 		"down":
 			anim.flip_h = false
 			anim.play("front_walk" if moving else "front_idle")
-		"up":
-			anim.flip_h = false
-			anim.play("back_walk" if moving else "back_idle")
+		
 
 
 func show_interact_label():

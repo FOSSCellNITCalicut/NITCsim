@@ -5,7 +5,6 @@
 [ext_resource type="Texture2D" uid="uid://ciofh3kv5yaiq" path="res://sprite/Tilemap/sprites/rndomhouse.png" id="3_rj586"]
 [ext_resource type="PackedScene" uid="uid://bhe6171ekahue" path="res://player/player.tscn" id="4_0hol4"]
 [ext_resource type="Texture2D" uid="uid://dokkuspvcrc8d" path="res://Sample.png" id="5_4d7sh"]
-[ext_resource type="Script" uid="uid://bax0nc6xtaspt" path="res://player/script/player.gd" id="5_q6r6c"]
 [ext_resource type="PackedScene" uid="uid://vblr75gchbxf" path="res://academic_building.tscn" id="7_d21ai"]
 
 [sub_resource type="CompressedTexture2D" id="CompressedTexture2D_d21ai"]
@@ -3187,7 +3186,6 @@ light_mask = 2
 z_index = 2
 position = Vector2(123, 131)
 scale = Vector2(0.765, 0.765)
-script = ExtResource("5_q6r6c")
 
 [node name="Academic building" parent="." unique_id=875644023 instance=ExtResource("7_d21ai")]
 position = Vector2(-157, 94)
