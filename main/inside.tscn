@@ -2916,5 +2916,3 @@ offset_top = 156.0
 offset_right = 467.0
 offset_bottom = 187.0
 text = "Save Game"
-
-[connection signal="pressed" from="PauseUI/Savebutton" to="player" method="_on_save_button_pressed"]
