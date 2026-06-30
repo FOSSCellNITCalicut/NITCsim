@@ -14,22 +14,7 @@ var is_paused := false
 
 func _ready():
 	print("Player In")
-	if pause_ui:
-		pause_ui.visible = false
-		var quit_btn = pause_ui.get_node("../PauseUI/Quitbutton")
-		if quit_btn:
-			quit_btn.pressed.connect(_on_quitbutton_pressed)
-		var save_btn = pause_ui.get_node_or_null("../PauseUI/Savebutton")
-		if save_btn:
-			save_btn.pressed.connect(_on_save_button_pressed)
-		var cont_btn = pause_ui.get_node_or_null("../PauseUI/Continuebutton")
-		var save_btn = pause_ui.get_node_or_null("../PauseUI/Savebutton")
-		if save_btn:
-			save_btn.pressed.connect(_on_save_button_pressed)
-		var cont_btn = pause_ui.get_node_or_null("../PauseUI/Continuebutton")
-		if cont_btn:
-			cont_btn.pressed.connect(_on_continuebutton_pressed)
-	
+	GameState.setup_pause_ui(pause_ui, self)
 	call_deferred("_play_start_idle")
 	interact_label.visible = false
 
@@ -39,7 +24,7 @@ func _play_start_idle():
 
 func _physics_process(_delta):
 	
-	if is_paused:
+	if GameState.is_paused:
 		velocity = Vector2.ZERO
 		return
 
@@ -65,9 +50,6 @@ func _physics_process(_delta):
 	move_and_slide()
 
 func _process(_delta):
-	if Input.is_action_just_pressed("ui_cancel"): # ESC button 
-		toggle_pause()
-		return
 	if can_interact and Input.is_action_just_pressed("interact"):
 		interact_label.visible = false
 		can_interact = false
@@ -99,31 +81,3 @@ func hide_interact_label():
 	can_interact = false
 	interact_label.visible = false
 	
-
-func toggle_pause():
-	is_paused = not is_paused
-	get_tree().paused = is_paused
-	if pause_ui:
-		pause_ui.visible = is_paused
-
-
-func _on_quitbutton_pressed():
-	get_tree().quit()
-	print("quiting...")
-	
-
-func _on_continuebutton_pressed():
-	is_paused = false
-	get_tree().paused = false
-	if pause_ui:
-		pause_ui.visible = false
-
-func _on_save_button_pressed():
-	var data = {
-		"scene": get_tree().current_scene.scene_file_path,
-		"position": {"x": position.x, "y": position.y},
-		"direction": current_dir
-	}
-	GameState.save_game(data)
-	print("Saving...")
-	get_tree().quit()

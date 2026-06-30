@@ -3239,10 +3239,3 @@ offset_top = 159.0
 offset_right = 475.0
 offset_bottom = 190.0
 text = "Save Game"
-
-[connection signal="pressed" from="StartUI/Continue_button" to="player" method="_on_continue_button_pressed"]
-[connection signal="pressed" from="StartUI/New_game_button" to="player" method="_on_new_game_button_pressed"]
-[connection signal="pressed" from="StartUI/Quitbutton" to="player" method="_on_quitbutton_pressed"]
-[connection signal="pressed" from="PauseUI/Quitbutton" to="player" method="_on_quitbutton_pressed"]
-[connection signal="pressed" from="PauseUI/Continuebutton" to="player" method="_on_continuebutton_pressed"]
-[connection signal="pressed" from="PauseUI/Savebutton" to="player" method="_on_save_button_pressed"]

@@ -7,45 +7,40 @@ extends CharacterBody2D
 const SPEED = 100
 var current_dir = "down"
 var can_interact := false
-var is_game_active := false 
-var is_paused := false
 
 
 
 func _ready():
 	interact_label.visible = false
-	is_game_active = false   
+
+	GameState.setup_pause_ui(pause_ui, self)
+
 	if GameState.save_data:
-		position = Vector2(GameState.save_data.position.x, GameState.save_data.position.y)
+		position = Vector2(
+			GameState.save_data.position.x,
+			GameState.save_data.position.y
+		)
+
 		current_dir = GameState.save_data.direction
-		is_game_active = true 
-		GameState.save_data = null # Clear data after loading
+		GameState.is_game_active = true
+		GameState.save_data = null
+
 		if start_ui:
-			start_ui.visible = false
+			start_ui.hide()
+
 		if pause_ui:
-			pause_ui.visible = false
-		_play_start_idle()
-		return
-	if start_ui and start_ui.has_node("StartButton"):
-		var btn = start_ui.get_node("StartButton")
-		btn.pressed.connect(_on_new_game_button_pressed)
-		start_ui.visible = true # to show UI at start
-		var cont_btn = start_ui.get_node_or_null("ContinueButton")
-		if cont_btn:
-			cont_btn.pressed.connect(_on_continue_button_pressed)
-	if pause_ui:
-		pause_ui.visible = false
-		var quit_btn = pause_ui.get_node("../PauseUI/Quitbutton")
-		if quit_btn:
-			quit_btn.pressed.connect(_on_quitbutton_pressed)
-		var save_btn = pause_ui.get_node_or_null("../PauseUI/Savebutton")
-		if save_btn:
-			save_btn.pressed.connect(_on_save_button_pressed)
-		var cont_btn = pause_ui.get_node_or_null("../PauseUI/ContinueButton")
-		if cont_btn:
-			cont_btn.pressed.connect(_on_continuebutton_pressed)
-	
+			pause_ui.hide()
+
+	else:
+		GameState.is_game_active = false
+
+		if start_ui:
+			start_ui.show()
+
+		GameState.setup_start_ui(start_ui)
+
 	call_deferred("_play_start_idle")
+	return
 
 
 func _play_start_idle():
@@ -53,13 +48,13 @@ func _play_start_idle():
 
 
 func _physics_process(_delta):
-	if not is_game_active:
+	if not GameState.is_game_active:
 		velocity = Vector2.ZERO
 		if not anim.is_playing() or anim.animation != "front_idle":
 			_play_start_idle()
 		return
 		
-	if is_paused:
+	if GameState.is_paused:
 		velocity = Vector2.ZERO
 		return
 	
@@ -85,12 +80,9 @@ func _physics_process(_delta):
 	move_and_slide()
 
 func _process(_delta):
-	if not is_game_active:
+	if not GameState.is_game_active:
 		return
-	if Input.is_action_just_pressed("ui_cancel"): # ESC
-		toggle_pause()
-		return
-	if is_paused:
+	if GameState.is_paused:
 		return 
 	if can_interact and Input.is_action_just_pressed("interact"):
 		interact_label.visible = false
@@ -124,41 +116,3 @@ func hide_interact_label():
 	can_interact = false
 	interact_label.visible = false
 	
-
-func toggle_pause():
-	is_paused = not is_paused
-	get_tree().paused = is_paused 
-	if pause_ui:
-		pause_ui.visible = is_paused
-
-
-func _on_quitbutton_pressed():
-	get_tree().quit()
-	print("Exiting...")
-
-
-func _on_continuebutton_pressed():
-	is_paused = false
-	get_tree().paused = false
-	if pause_ui:
-		pause_ui.visible = false
-
-func _on_save_button_pressed():
-	var data = {
-		"scene": get_tree().current_scene.scene_file_path,
-		"position": {"x": position.x, "y": position.y},
-		"direction": current_dir
-	}
-	GameState.save_game(data)
-	print("Game saved")
-	get_tree().quit()
-
-
-func _on_new_game_button_pressed():
-	is_game_active = true 
-	start_ui.visible = false 
-	print("New Game Started - Controls Enabled")
-
-
-func _on_continue_button_pressed():
-	GameState.load_game()
