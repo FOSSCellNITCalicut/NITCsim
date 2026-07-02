@@ -67,8 +67,7 @@ func interact(player: Node) -> void:
 	if not is_instance_valid(player):
 		return
 	DialogueBox.start_dialogue(npc_name, _dialogue_lines)
-	# Wait for dialog to close, then re-offer interaction next frame
 	await DialogueBox.dialogue_closed
-	await get_tree().process_frame
+	await get_tree().create_timer(3.0).timeout
 	if is_instance_valid(player) and player.has_method("offer_interaction"):
 		player.offer_interaction(self, "Press E to talk to %s" % npc_name)
