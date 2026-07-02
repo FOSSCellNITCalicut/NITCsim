@@ -2958,11 +2958,13 @@ position = Vector2(388, 211)
 [node name="Receptionist" parent="." unique_id=1460493668 instance=ExtResource("7_npc")]
 position = Vector2(205, 65)
 npc_name = "Ms. Priya"
+dialog_file = "res://dialogs/receptionist.json"
 
 [node name="StudentGuide" parent="." unique_id=1529860639 instance=ExtResource("7_npc")]
 position = Vector2(392, 112)
 npc_name = "Arjun"
 idle_animation = "side_idle"
+dialog_file = "res://dialogs/student.json"
 
 [connection signal="body_entered" from="ExitDoor" to="ExitDoor" method="_on_body_entered"]
 [connection signal="body_exited" from="ExitDoor" to="ExitDoor" method="_on_body_exited"]

@@ -1,5 +1,7 @@
 extends CanvasLayer
 
+signal dialogue_closed
+
 var _lines: PackedStringArray = []
 var _speaker := ""
 var _index := 0
@@ -62,3 +64,4 @@ func _close() -> void:
 	_panel.visible = false
 	_lines.clear()
 	_speaker = ""
+	dialogue_closed.emit()
