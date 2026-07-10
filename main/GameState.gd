@@ -107,7 +107,8 @@ func toggle_pause(pause_ui):
 
 
 func handle_pause_input(pause_ui):
-
+	if not is_game_active:
+		return
 	if Input.is_action_just_pressed("ui_cancel"):
 		print("ESC detected")
 		toggle_pause(pause_ui)
