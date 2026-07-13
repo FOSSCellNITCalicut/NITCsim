@@ -1,35 +1,65 @@
 extends CharacterBody2D
-
-@onready var interact_label: Label = $Label
 @onready var anim = $AnimatedSprite2D
+@onready var interact_label: Label = $Label
+@onready var start_ui = $"../StartUI"
+@onready var pause_ui = get_node_or_null("../PauseUI")
+
+const SPEED = 100
+var current_dir = "down"
+var can_interact := false
+
 
 const SPEED = 100
 
-var current_dir := "down"
-var can_interact := false
-var _interact_target: Node = null
-
-
-func _ready() -> void:
-	call_deferred("_play_start_idle")
+func _ready():
 	interact_label.visible = false
-	var return_pos := GameState.consume_return_position()
-	if return_pos != Vector2.ZERO:
-		global_position = return_pos
+
+	GameState.setup_pause_ui(pause_ui, self)
+
+	if GameState.save_data:
+		position = Vector2(
+			GameState.save_data.position.x,
+			GameState.save_data.position.y
+		)
+
+		current_dir = GameState.save_data.direction
+		GameState.is_game_active = true
+		GameState.save_data = null
+
+		if start_ui:
+			start_ui.hide()
+
+		if pause_ui:
+			pause_ui.hide()
+
+	else:
+		GameState.is_game_active = false
+
+		if start_ui:
+			start_ui.show()
+
+		GameState.setup_start_ui(start_ui)
+
+	call_deferred("_play_start_idle")
+	return
 
 
 func _play_start_idle() -> void:
 	anim.play("front_idle")
 
 
-func _physics_process(_delta: float) -> void:
-	if DialogueBox.is_blocking():
+func _physics_process(_delta):
+	if not GameState.is_game_active:
 		velocity = Vector2.ZERO
-		play_anim(false)
-		move_and_slide()
+		if not anim.is_playing() or anim.animation != "front_idle":
+			_play_start_idle()
 		return
-
-	var input_dir := Vector2(
+		
+	if GameState.is_paused:
+		velocity = Vector2.ZERO
+		return
+	
+	var input_dir = Vector2(
 		Input.get_action_strength("ui_right") - Input.get_action_strength("ui_left"),
 		Input.get_action_strength("ui_down") - Input.get_action_strength("ui_up")
 	)
@@ -40,7 +70,8 @@ func _physics_process(_delta: float) -> void:
 		elif abs(input_dir.y) < 0.1 and input_dir.x != 0:
 			current_dir = "right" if input_dir.x > 0 else "left"
 		else:
-			current_dir = "right" if abs(input_dir.x) > abs(input_dir.y) else ("down" if input_dir.y > 0 else "up")
+			current_dir = "right" if input_dir.x > 0 else "left"
+		
 		velocity = input_dir.normalized() * SPEED
 		play_anim(true)
 	else:
@@ -49,10 +80,11 @@ func _physics_process(_delta: float) -> void:
 
 	move_and_slide()
 
-
-func _process(_delta: float) -> void:
-	if DialogueBox.is_open():
+func _process(_delta):
+	if not GameState.is_game_active:
 		return
+	if GameState.is_paused:
+		return 
 	if can_interact and Input.is_action_just_pressed("interact"):
 		_trigger_interaction()
 
@@ -90,6 +122,9 @@ func hide_interact_label() -> void:
 
 func play_anim(moving: bool) -> void:
 	match current_dir:
+		"up":
+			anim.flip_h = false
+			anim.play("back_walk" if moving else "back_idle")
 		"right":
 			anim.flip_h = false
 			anim.play("side_walk" if moving else "side_idle")
@@ -99,6 +134,14 @@ func play_anim(moving: bool) -> void:
 		"down":
 			anim.flip_h = false
 			anim.play("front_walk" if moving else "front_idle")
-		"up":
-			anim.flip_h = false
-			anim.play("back_walk" if moving else "back_idle")
+		
+
+
+func show_interact_label():
+	can_interact = true
+	interact_label.visible = true
+
+func hide_interact_label():
+	can_interact = false
+	interact_label.visible = false
+	

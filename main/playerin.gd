@@ -1,10 +1,12 @@
 extends CharacterBody2D
-
 @onready var interact_label: Label = $Label
-@onready var anim: AnimatedSprite2D = $AnimatedSprite2D
-@onready var camera: Camera2D = $Camera2D
+@onready var anim = $AnimatedSprite2D
+@onready var pause_ui = get_node_or_null("../PauseUI")
 
 const SPEED = 100
+var current_dir = "up"
+var can_interact := false
+var is_paused := false
 
 var current_dir := "down"
 var can_interact := false
@@ -16,15 +18,11 @@ func _ready() -> void:
 	reset_for_interior_spawn()
 
 
-func reset_for_interior_spawn() -> void:
-	current_dir = "down"
-	velocity = Vector2.ZERO
-	if anim:
-		anim.play("front_idle")
-	if camera:
-		camera.make_current()
-		camera.reset_smoothing()
-		camera.force_update_scroll()
+func _ready():
+	print("Player In")
+	GameState.setup_pause_ui(pause_ui, self)
+	call_deferred("_play_start_idle")
+	interact_label.visible = false
 
 
 func _physics_process(_delta: float) -> void:
@@ -34,7 +32,13 @@ func _physics_process(_delta: float) -> void:
 		move_and_slide()
 		return
 
-	var input_dir := Vector2(
+func _physics_process(_delta):
+	
+	if GameState.is_paused:
+		velocity = Vector2.ZERO
+		return
+
+	var input_dir = Vector2(
 		Input.get_action_strength("ui_right") - Input.get_action_strength("ui_left"),
 		Input.get_action_strength("ui_down") - Input.get_action_strength("ui_up")
 	)

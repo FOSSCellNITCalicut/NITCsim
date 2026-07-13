@@ -1,0 +1,5 @@
+res://node_2d.tscn
+res://GameState.gd
+res://player/script/player.gd
+res://playerin.gd
+res://inside.tscn
