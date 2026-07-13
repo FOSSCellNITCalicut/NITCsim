@@ -2,8 +2,13 @@
 
 [ext_resource type="Texture2D" uid="uid://dokkuspvcrc8d" path="res://Sample.png" id="1_r8opg"]
 [ext_resource type="Texture2D" uid="uid://c5n5qvms48yww" path="res://sprite/Tilemap/tilemap_packed.png" id="2_7ujdm"]
-[ext_resource type="PackedScene" uid="uid://bvqq6e3lnlj3l" path="res://player.tscn" id="3_7ujdm"]
+[ext_resource type="PackedScene" uid="uid://bhe6171ekahue" path="res://player/player.tscn" id="3_7ujdm"]
 [ext_resource type="Script" uid="uid://bplcj5ulj7fak" path="res://playerin.gd" id="4_touke"]
+[ext_resource type="Script" uid="uid://c1yniescyoj6k" path="res://inside.gd" id="5_inside"]
+[ext_resource type="Script" uid="uid://bhqkldq84l1no" path="res://building_exit.gd" id="6_exit"]
+[ext_resource type="PackedScene" uid="uid://jriw7c35rm3y" path="res://npc.tscn" id="7_npc"]
+[ext_resource type="PackedScene" uid="uid://cuv8v5pamu1is" path="res://furniture_piece.tscn" id="8_furniture"]
+[ext_resource type="PackedScene" uid="uid://b8cgfj6blkrc7" path="res://table_set.tscn" id="9_tableset"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_touke"]
 texture = ExtResource("1_r8opg")

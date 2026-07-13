@@ -9,6 +9,7 @@ var current_dir = "down"
 var can_interact := false
 
 
+const SPEED = 100
 
 func _ready():
 	interact_label.visible = false
@@ -43,7 +44,7 @@ func _ready():
 	return
 
 
-func _play_start_idle():
+func _play_start_idle() -> void:
 	anim.play("front_idle")
 
 
@@ -85,13 +86,41 @@ func _process(_delta):
 	if GameState.is_paused:
 		return 
 	if can_interact and Input.is_action_just_pressed("interact"):
-		interact_label.visible = false
+		_trigger_interaction()
+
+
+func _trigger_interaction() -> void:
+	interact_label.visible = false
+	can_interact = false
+	var target := _interact_target
+	_interact_target = null
+	if target and target.has_method("interact"):
+		target.interact(self)
+
+
+func offer_interaction(target: Node, prompt: String) -> void:
+	_interact_target = target
+	interact_label.text = prompt
+	can_interact = true
+	interact_label.visible = true
+
+
+func clear_interaction(target: Node) -> void:
+	if _interact_target == target:
+		_interact_target = null
 		can_interact = false
-		get_tree().change_scene_to_file("res://inside.tscn")
+		interact_label.visible = false
 
 
+func show_interact_label() -> void:
+	offer_interaction(null, "Press E to enter")
 
-func play_anim(moving: bool):
+
+func hide_interact_label() -> void:
+	clear_interaction(null)
+
+
+func play_anim(moving: bool) -> void:
 	match current_dir:
 		"up":
 			anim.flip_h = false
