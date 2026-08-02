@@ -1,20 +1,49 @@
-# Godot 4.2+ specific ignores
-~*.dll
+# ==========================
+# Godot 4
+# ==========================
 
-# Godot 4+ specific ignores
-main/.godot/
-.nomedia
+# Godot editor cache (DO NOT COMMIT)
+.godot/
 
-# Godot-specific ignores
-.import/
+# Godot export files
 export.cfg
 export_credentials.cfg
-*.tmp
 
-# Imported translations (automatically generated from CSV files)
+# Temporary files
+*.tmp
 *.translation
 
-# Mono-specific ignores
+# ==========================
+# Mono / C#
+# ==========================
+
 .mono/
 data_*/
 mono_crash.*.json
+
+# ==========================
+# Native libraries
+# ==========================
+
+~*.dll
+
+# ==========================
+# OS files
+# ==========================
+
+.DS_Store
+Thumbs.db
+.nomedia
+
+# ==========================
+# IDEs
+# ==========================
+
+.vscode/
+.idea/
+
+# ==========================
+# Logs
+# ==========================
+
+*.log
