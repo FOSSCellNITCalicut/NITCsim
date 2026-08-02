@@ -102,6 +102,11 @@ func _process(_delta):
 		elif can_interact:
 			interact_label.visible = false
 			can_interact = false
+			GameState.return_position = {
+				"x": position.x,
+				"y": position.y,
+				"direction": current_dir,
+			}
 			get_tree().change_scene_to_file("res://inside.tscn")
 
 

@@ -2,6 +2,7 @@
 extends Node
 
 var save_data = null
+var return_position = null
 const SAVE_PATH = "user://savegame.json"
 
 func save_game(data: Dictionary) -> void:
