@@ -32,12 +32,12 @@ func _ready():
 			pause_ui.hide()
 
 	else:
-		GameState.is_game_active = false
-
 		if start_ui:
+			GameState.is_game_active = false
 			start_ui.show()
-
-		GameState.setup_start_ui(start_ui)
+			GameState.setup_start_ui(start_ui)
+		else:
+			GameState.is_game_active = true
 
 	call_deferred("_play_start_idle")
 	return
