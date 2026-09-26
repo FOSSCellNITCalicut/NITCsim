@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="BuildingPortal" format=3 uid="uid://dkgb1pvr1uo1x"]
+
+[ext_resource type="PackedScene" uid="uid://ccthg20h0ajy6" path="res://Scenes/World/Buildings/Acad_building/ab_inside.tscn" id="1_bfeke"]
+[ext_resource type="Script" uid="uid://k5h84dujr37v" path="res://Mechanics/interaction/building_portal.gd" id="1_hijyx"]
+
+[resource]
+script = ExtResource("1_hijyx")
+interior_scene = ExtResource("1_bfeke")
+entrance_marker_name = "AB_entrance"
+metadata/_custom_type_script = "uid://k5h84dujr37v"

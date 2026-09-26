@@ -5,17 +5,17 @@
 [sub_resource type="CircleShape2D" id="CircleShape2D_ndsss"]
 radius = 29.2746
 
-[node name="InteractingComponent" type="Node2D"]
+[node name="InteractingComponent" type="Node2D" unique_id=304849136]
 script = ExtResource("1_y2nwr")
 
-[node name="InteractingRnage" type="Area2D" parent="."]
+[node name="InteractingRnage" type="Area2D" parent="." unique_id=409559892]
 collision_layer = 0
 collision_mask = 2
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="InteractingRnage"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="InteractingRnage" unique_id=1741744527]
 shape = SubResource("CircleShape2D_ndsss")
 
-[node name="InteractLabel" type="Label" parent="."]
+[node name="InteractLabel" type="Label" parent="." unique_id=1417259631]
 z_index = 10
 anchors_preset = 8
 anchor_left = 0.5
@@ -32,3 +32,6 @@ size_flags_horizontal = 4
 text = "E to interact"
 horizontal_alignment = 1
 vertical_alignment = 1
+
+[connection signal="body_entered" from="InteractingRnage" to="." method="_on_interacting_rnage_body_entered"]
+[connection signal="body_exited" from="InteractingRnage" to="." method="_on_interacting_rnage_body_exited"]

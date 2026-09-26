@@ -1,4 +1,6 @@
 extends CharacterBody2D
+class_name Player
+
 @onready var anim = $AnimatedSprite2D
 @onready var interact_label: Label = $Label
 @onready var start_ui = $"../StartUI"
@@ -8,6 +10,7 @@ const SPEED = 100
 var current_dir = "down"
 var can_interact := false
 
+var door_used
 
 
 func _ready():
@@ -31,9 +34,12 @@ func _ready():
 		if pause_ui:
 			pause_ui.hide()
 
+	elif GameState.is_game_active:
+		if start_ui:
+			start_ui.hide()
+
 	else:
 		if start_ui:
-			GameState.is_game_active = false
 			start_ui.show()
 			GameState.setup_start_ui(start_ui)
 		else:
@@ -87,7 +93,7 @@ func _process(_delta):
 	if can_interact and Input.is_action_just_pressed("interact"):
 		interact_label.visible = false
 		can_interact = false
-		get_tree().change_scene_to_file("res://Scenes/World/Buildings/Acad_building/ab_inside.tscn")
+		WorldManager.change_scene("res://Scenes/World/Buildings/Acad_building/ab_inside.tscn")
 
 
 
