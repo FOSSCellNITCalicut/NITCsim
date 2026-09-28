@@ -1,11 +1,11 @@
 [gd_scene format=4 uid="uid://cm6vn8u6113m3"]
 
 [ext_resource type="Texture2D" uid="uid://dx1qfsr2tq8m4" path="res://Assets/sprite/Tilemap/tilemap.png" id="1_1tp12"]
-[ext_resource type="Script" uid="uid://kng6oyyha0mf" path="res://Scenes/playable_scene.gd" id="1_42jam"]
+[ext_resource type="Script" uid="uid://kng6oyyha0mf" path="res://Scenes/PlayableScene.gd" id="1_42jam"]
 [ext_resource type="Texture2D" uid="uid://ciofh3kv5yaiq" path="res://Assets/sprite/Tilemap/sprites/rndomhouse.png" id="2_42jam"]
 [ext_resource type="Texture2D" uid="uid://c5n5qvms48yww" path="res://Assets/sprite/Tilemap/tilemap_packed.png" id="3_k5cj5"]
 [ext_resource type="Texture2D" uid="uid://dokkuspvcrc8d" path="res://Assets/World/Sample.png" id="4_lyqml"]
-[ext_resource type="PackedScene" uid="uid://bhe6171ekahue" path="res://Scenes/player/player.tscn" id="5_oxewe"]
+[ext_resource type="PackedScene" uid="uid://bhe6171ekahue" path="res://Scenes/Player/Player.tscn" id="5_oxewe"]
 [ext_resource type="PackedScene" uid="uid://vblr75gchbxf" path="res://Scenes/World/Buildings/Acad_building/academic_building.tscn" id="6_kyray"]
 
 [sub_resource type="CompressedTexture2D" id="CompressedTexture2D_d21ai"]
@@ -3232,15 +3232,16 @@ offset_right = 475.0
 offset_bottom = 190.0
 text = "Save Game"
 
-[node name="Academic building" parent="." unique_id=145569419 instance=ExtResource("6_kyray")]
-position = Vector2(-232, 177)
-scale = Vector2(1.7, 1.7)
-
-[node name="AB_Door1" type="Marker2D" parent="Academic building" unique_id=1360670430]
-position = Vector2(-37.647034, 84.70589)
-
 [node name="SpawnPoint" type="Marker2D" parent="." unique_id=904757737]
 position = Vector2(-180, 426)
 
 [node name="player" parent="." unique_id=2069761242 instance=ExtResource("5_oxewe")]
 position = Vector2(223, 216)
+
+[node name="Academic building" parent="." unique_id=1395428172 instance=ExtResource("6_kyray")]
+position = Vector2(-230.99998, 174)
+scale = Vector2(1.7, 1.7)
+
+[node name="AB_Door1" type="Marker2D" parent="Academic building" unique_id=1360670430]
+position = Vector2(-38.235275, 86.47059)
+scale = Vector2(1.0000001, 1.0000001)

@@ -1,10 +1,10 @@
 [gd_scene format=4 uid="uid://ccthg20h0ajy6"]
 
-[ext_resource type="Script" uid="uid://kng6oyyha0mf" path="res://Scenes/playable_scene.gd" id="1_p60jf"]
+[ext_resource type="Script" uid="uid://kng6oyyha0mf" path="res://Scenes/PlayableScene.gd" id="1_p60jf"]
 [ext_resource type="Texture2D" uid="uid://dokkuspvcrc8d" path="res://Assets/World/Sample.png" id="1_r8opg"]
 [ext_resource type="Texture2D" uid="uid://c5n5qvms48yww" path="res://Assets/sprite/Tilemap/tilemap_packed.png" id="2_7ujdm"]
-[ext_resource type="PackedScene" uid="uid://bhe6171ekahue" path="res://Scenes/player/player.tscn" id="3_7ujdm"]
-[ext_resource type="Script" uid="uid://d86btchlufxu" path="res://Mechanics/interaction/interaction_box.gd" id="4_touke"]
+[ext_resource type="PackedScene" uid="uid://bhe6171ekahue" path="res://Scenes/Player/Player.tscn" id="3_7ujdm"]
+[ext_resource type="Script" uid="uid://d86btchlufxu" path="res://Mechanics/Interaction/Door.gd" id="4_u0vcw"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_touke"]
 texture = ExtResource("1_r8opg")
@@ -2913,7 +2913,7 @@ offset_bottom = 187.0
 text = "Save Game"
 
 [node name="AB_Door1" type="Area2D" parent="." unique_id=1115343732]
-script = ExtResource("4_touke")
+script = ExtResource("4_u0vcw")
 target_scene_path = "uid://cm6vn8u6113m3"
 door_name = "AB_Door1"
 metadata/_custom_type_script = "uid://d86btchlufxu"
